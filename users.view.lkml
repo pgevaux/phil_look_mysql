@@ -36,6 +36,16 @@ view: users {
     sql: ${TABLE}.created_at ;;
   }
 
+  dimension: days_since_signup {
+    type: number
+    sql: datediff(current_date,${created_date}) ;;
+  }
+
+  dimension: months_since_signup {
+    type: number
+    sql: truncate(datediff(current_date,${created_date})/30,0) ;;
+  }
+
   dimension: email {
     type: string
     sql: ${TABLE}.email ;;
